@@ -1,0 +1,568 @@
+/*
+===============================================================================
+                    JUNIT LIFECYCLE ANNOTATIONS
+===============================================================================
+
+WHAT IS JUNIT LIFECYCLE?
+------------------------
+Every JUnit test method goes through a fixed execution sequence.
+This sequence is called the JUnit Test Lifecycle.
+
+Instead of writing setup and cleanup code inside every test method,
+JUnit provides Lifecycle Annotations.
+
+These annotations automatically execute code
+before or after test methods.
+
+===============================================================================
+WHY DO WE NEED LIFECYCLE ANNOTATIONS?
+===============================================================================
+
+Suppose you have 100 test methods.
+
+Before every test you need to
+
+• Create Calculator Object
+• Connect Database
+• Open Browser
+• Create Test Data
+
+After every test you need to
+
+• Close Browser
+• Disconnect Database
+• Delete Test Data
+
+Writing the same code inside every test method
+creates duplicate code.
+
+JUnit solves this problem using Lifecycle Annotations.
+
+===============================================================================
+JUNIT LIFECYCLE ORDER
+===============================================================================
+
+                @BeforeAll
+                     │
+                     ▼
+                @BeforeEach
+                     │
+                     ▼
+                  @Test
+                     │
+                     ▼
+                @AfterEach
+                     │
+                     ▼
+          (Repeat for every test)
+                     │
+                     ▼
+                 @AfterAll
+
+===============================================================================
+EXECUTION FLOW
+===============================================================================
+
+Suppose there are 3 test methods.
+
+Execution Order
+
+1.
+
+@BeforeAll
+
+↓
+
+@BeforeEach
+
+↓
+
+Test 1
+
+↓
+
+@AfterEach
+
+----------------------------------------
+
+2.
+
+@BeforeEach
+
+↓
+
+Test 2
+
+↓
+
+@AfterEach
+
+----------------------------------------
+
+3.
+
+@BeforeEach
+
+↓
+
+Test 3
+
+↓
+
+@AfterEach
+
+----------------------------------------
+
+Finally
+
+@AfterAll
+
+===============================================================================
+WHAT IS @BeforeAll?
+===============================================================================
+
+Interview Definition
+
+@BeforeAll executes only ONE TIME
+before all test methods.
+
+Purpose
+
+Used for one-time initialization.
+
+Examples
+
+• Database Connection
+• Reading Configuration
+• Starting Server
+• Loading Test Data
+• Creating Shared Resources
+
+Important
+
+@BeforeAll method must be static.
+
+Example
+
+@BeforeAll
+public static void setup()
+{
+    System.out.println("Database Connected");
+}
+
+===============================================================================
+WHAT IS @BeforeEach?
+===============================================================================
+
+Interview Definition
+
+@BeforeEach executes BEFORE EVERY test method.
+
+Purpose
+
+Used for preparing test environment.
+
+Examples
+
+• Creating Objects
+• Resetting Variables
+• Preparing Test Data
+• Opening Browser
+• Creating Mock Objects
+
+Example
+
+@BeforeEach
+public void setup()
+{
+    System.out.println("Calculator Created");
+}
+
+===============================================================================
+WHAT IS @Test?
+===============================================================================
+
+Interview Definition
+
+@Test marks a method as a JUnit test case.
+
+JUnit executes every method marked with @Test.
+
+Example
+
+@Test
+public void testAddition()
+{
+    ...
+}
+
+===============================================================================
+WHAT IS @AfterEach?
+===============================================================================
+
+Interview Definition
+
+@AfterEach executes AFTER EVERY test method.
+
+Purpose
+
+Used for cleaning resources after each test.
+
+Examples
+
+• Closing Browser
+• Clearing Objects
+• Resetting Variables
+• Cleaning Temporary Files
+• Rolling Back Database Transactions
+
+Example
+
+@AfterEach
+public void cleanup()
+{
+    System.out.println("Cleanup Completed");
+}
+
+===============================================================================
+WHAT IS @AfterAll?
+===============================================================================
+
+Interview Definition
+
+@AfterAll executes only ONE TIME
+after all test methods finish.
+
+Purpose
+
+Used for one-time cleanup.
+
+Examples
+
+• Closing Database
+• Closing Server
+• Releasing Resources
+• Closing Browser Driver
+
+Important
+
+@AfterAll method must be static.
+
+Example
+
+@AfterAll
+public static void close()
+{
+    System.out.println("Database Closed");
+}
+
+===============================================================================
+COMPLETE EXECUTION EXAMPLE
+===============================================================================
+
+Suppose
+
+@BeforeAll
+
+@BeforeEach
+
+Test 1
+
+@AfterEach
+
+@BeforeEach
+
+Test 2
+
+@AfterEach
+
+@BeforeEach
+
+Test 3
+
+@AfterEach
+
+@AfterAll
+
+Console Output
+
+Database Connected
+
+Calculator Created
+
+Test 1
+
+Cleanup Completed
+
+Calculator Created
+
+Test 2
+
+Cleanup Completed
+
+Calculator Created
+
+Test 3
+
+Cleanup Completed
+
+Database Closed
+
+===============================================================================
+REAL LIFE EXAMPLE
+===============================================================================
+
+Imagine you are conducting an online exam.
+
+Before Exam Starts
+
+--------------------------------
+
+Open Exam Hall
+
+This happens only ONE TIME.
+
+Equivalent
+
+@BeforeAll
+
+--------------------------------
+
+Before Every Student
+
+Check Identity
+
+Give Answer Sheet
+
+Equivalent
+
+@BeforeEach
+
+--------------------------------
+
+Student Writes Exam
+
+Equivalent
+
+@Test
+
+--------------------------------
+
+After Every Student
+
+Collect Answer Sheet
+
+Reset Desk
+
+Equivalent
+
+@AfterEach
+
+--------------------------------
+
+After Last Student
+
+Close Exam Hall
+
+Equivalent
+
+@AfterAll
+
+===============================================================================
+WHEN TO USE WHICH ANNOTATION?
+===============================================================================
+
+@BeforeAll
+
+Use For
+
+• Database Connection
+• Server Startup
+• Loading Configuration
+
+----------------------------------------
+
+@BeforeEach
+
+Use For
+
+• Object Creation
+• Variable Initialization
+• Browser Launch
+
+----------------------------------------
+
+@Test
+
+Use For
+
+Actual Test Logic
+
+----------------------------------------
+
+@AfterEach
+
+Use For
+
+• Cleanup
+• Reset Variables
+• Close Browser
+
+----------------------------------------
+
+@AfterAll
+
+Use For
+
+• Close Database
+• Stop Server
+• Free Resources
+
+===============================================================================
+ADVANTAGES
+===============================================================================
+
+• Removes Duplicate Code
+
+• Better Readability
+
+• Automatic Setup
+
+• Automatic Cleanup
+
+• Easy Maintenance
+
+• Faster Test Development
+
+• Industry Standard Practice
+
+===============================================================================
+COMMON MISTAKES
+===============================================================================
+
+❌ Forgetting static in @BeforeAll
+
+❌ Forgetting static in @AfterAll
+
+❌ Writing Business Logic inside @BeforeEach
+
+❌ Performing Cleanup inside @BeforeAll
+
+❌ Creating Objects repeatedly inside every test
+instead of @BeforeEach
+
+===============================================================================
+INTERVIEW QUESTIONS
+===============================================================================
+
+Q1. What is JUnit Lifecycle?
+
+Ans:
+
+It is the execution sequence followed by JUnit
+for every test method.
+
+--------------------------------------------------
+
+Q2. Which annotation executes only once before all tests?
+
+Ans:
+
+@BeforeAll
+
+--------------------------------------------------
+
+Q3. Which annotation executes before every test?
+
+Ans:
+
+@BeforeEach
+
+--------------------------------------------------
+
+Q4. Which annotation executes after every test?
+
+Ans:
+
+@AfterEach
+
+--------------------------------------------------
+
+Q5. Which annotation executes only once after all tests?
+
+Ans:
+
+@AfterAll
+
+--------------------------------------------------
+
+Q6. Why must @BeforeAll and @AfterAll methods be static?
+
+Ans:
+
+Because they execute once before any test object
+is created and once after all test objects are finished.
+
+--------------------------------------------------
+
+Q7. Which annotation is used for object initialization?
+
+Ans:
+
+@BeforeEach
+
+--------------------------------------------------
+
+Q8. Which annotation is used for resource cleanup?
+
+Ans:
+
+@AfterEach or @AfterAll
+depending on whether cleanup is required
+after each test or after all tests.
+
+===============================================================================
+ONE-LINE REVISION
+===============================================================================
+
+@BeforeAll
+→ Runs once before all tests.
+
+@BeforeEach
+→ Runs before every test.
+
+@Test
+→ Actual test method.
+
+@AfterEach
+→ Runs after every test.
+
+@AfterAll
+→ Runs once after all tests.
+
+Execution Order
+
+@BeforeAll
+
+↓
+
+@BeforeEach
+
+↓
+
+@Test
+
+↓
+
+@AfterEach
+
+↓
+
+Repeat
+
+↓
+
+@AfterAll
+
+===============================================================================
+*/

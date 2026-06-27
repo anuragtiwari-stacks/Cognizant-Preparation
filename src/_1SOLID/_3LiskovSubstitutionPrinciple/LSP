@@ -1,0 +1,632 @@
+/*
+LISKOV SUBSTITUTION PRINCIPLE (LSP)
+
+1. Definition
+
+The Liskov Substitution Principle (LSP) is the third
+principle of the SOLID principles.
+
+It was introduced by Barbara Liskov in 1987.
+
+It states:
+
+"Objects of a superclass should be replaceable
+with objects of its subclasses without affecting
+the correctness of the program."
+
+In simple words:
+
+A child class should be able to replace its
+parent class without causing unexpected behavior.
+
+--------------------------------------------------
+
+2. Why Do We Need LSP?
+
+Inheritance is one of the most important features
+of Object-Oriented Programming.
+
+A child class inherits properties and methods
+from its parent class.
+
+However, if the child class behaves differently
+from what the parent class promises, the program
+can produce incorrect results.
+
+LSP ensures that every child class behaves
+correctly when used through a parent reference.
+
+--------------------------------------------------
+
+3. Relationship Between OCP And LSP
+
+The Open/Closed Principle (OCP) allows us
+to extend software without modifying existing code.
+
+However, OCP works properly only when child classes
+can safely replace parent classes.
+
+LSP ensures that subclasses are truly compatible
+with their parent classes.
+
+Therefore:
+
+OCP depends on LSP.
+
+Without LSP, OCP cannot be fully achieved.
+
+--------------------------------------------------
+
+4. Banking Application Example
+
+Consider a Banking Application.
+
+The bank provides different account types:
+
+• Savings Account
+• Current Account
+• Fixed Deposit Account
+
+All account types are represented using
+a common Account class.
+
+Initially the design looks correct.
+
+--------------------------------------------------
+
+5. Problem Without LSP
+
+Suppose Account defines:
+
+• deposit()
+• withdraw()
+
+Savings Account
+
+Supports:
+
+• deposit()
+• withdraw()
+
+Current Account
+
+Supports:
+
+• deposit()
+• withdraw()
+
+Fixed Deposit Account
+
+Supports:
+
+• deposit()
+
+Does NOT support:
+
+• withdraw()
+
+--------------------------------------------------
+
+6. Incorrect Design
+
+Account
+│
+├── SavingsAccount
+├── CurrentAccount
+└── FixedDepositAccount
+
+Since FixedDepositAccount extends Account,
+it is forced to implement withdraw().
+
+Example:
+
+class FixedDepositAccount extends Account
+{
+
+    @Override
+    public void withdraw()
+    {
+
+        throw new UnsupportedOperationException();
+    }
+}
+
+--------------------------------------------------
+
+7. Why Is This Wrong?
+
+Suppose:
+
+Account account =
+        new FixedDepositAccount();
+
+WithdrawalService service =
+        new WithdrawalService(account);
+
+service.withdraw();
+
+Runtime Output:
+
+UnsupportedOperationException
+
+The application crashes.
+
+Although FixedDepositAccount is an Account,
+it cannot behave like a normal Account.
+
+Therefore it cannot safely replace Account.
+
+Hence LSP is violated.
+
+--------------------------------------------------
+
+8. LSP Definition Explained
+
+According to Barbara Liskov:
+
+If a program works correctly with a parent class,
+it should continue to work correctly when any
+child class object is substituted.
+
+Example:
+
+Bird bird = new Sparrow();
+
+Bird bird = new Eagle();
+
+Both work correctly.
+
+The child objects can replace Bird safely.
+
+Therefore LSP is satisfied.
+
+--------------------------------------------------
+
+9. Correct LSP Design
+
+Instead of forcing every account to support
+withdrawals, create a better hierarchy.
+
+Account
+│
+├── FixedDepositAccount
+│
+└── WithdrawableAccount
+    │
+    ├── SavingsAccount
+    └── CurrentAccount
+
+Now:
+
+Account
+    -> deposit()
+
+WithdrawableAccount
+    -> withdraw()
+
+Only accounts that support withdrawal
+inherit WithdrawableAccount.
+
+--------------------------------------------------
+
+10. Benefits Of Correct Design
+
+• No UnsupportedOperationException
+• Better inheritance hierarchy
+• Better maintainability
+• Better scalability
+• Better flexibility
+
+--------------------------------------------------
+
+11. How LSP Is Achieved
+
+Parent classes define behaviors that every
+child class can actually support.
+
+Child classes must never:
+
+• Remove functionality
+• Break functionality
+• Change expected behavior
+
+If the parent promises something,
+the child must fulfill that promise.
+
+--------------------------------------------------
+
+12. Behavioral Subtyping
+
+LSP is based on the concept of
+Behavioral Subtyping.
+
+Behavioral Subtyping means:
+
+A child class should not only inherit methods,
+but should also preserve the behavior expected
+from those methods.
+
+Example:
+
+Account account =
+        new SavingsAccount();
+
+account.withdraw();
+
+Works correctly.
+
+--------------------------------------------------
+
+Account account =
+        new CurrentAccount();
+
+account.withdraw();
+
+Works correctly.
+
+--------------------------------------------------
+
+Account account =
+        new FixedDepositAccount();
+
+account.withdraw();
+
+Fails.
+
+Therefore FixedDepositAccount is not a
+behavioral subtype of Account.
+
+--------------------------------------------------
+
+13. Rules Of LSP
+
+There are several important rules that help
+ensure LSP compliance.
+
+--------------------------------------------------
+
+Rule 1: Signature Rule
+
+Child methods should have compatible signatures.
+
+Parameter types should remain compatible.
+
+Return types may become narrower.
+
+--------------------------------------------------
+
+Rule 2: Exception Rule
+
+Child classes should not throw broader exceptions.
+
+Example:
+
+Parent:
+
+public void withdraw()
+        throws IOException
+
+Child:
+
+public void withdraw()
+        throws FileNotFoundException
+
+Valid.
+
+--------------------------------------------------
+
+Child:
+
+public void withdraw()
+        throws Exception
+
+Invalid.
+
+--------------------------------------------------
+
+Rule 3: Invariant Rule
+
+Child classes must preserve parent constraints.
+
+Example:
+
+Car
+
+speed < limit
+
+Every child class must maintain:
+
+speed < limit
+
+--------------------------------------------------
+
+Rule 4: History Constraint
+
+Child classes should not allow state changes
+that parent classes do not allow.
+
+Example:
+
+Car mileage can only increase.
+
+A child class must not reset mileage to zero.
+
+--------------------------------------------------
+
+Rule 5: Preconditions
+
+Child classes may weaken preconditions.
+
+Parent:
+
+Valid values:
+1 to 5
+
+Child:
+
+Valid values:
+1 to 10
+
+Allowed.
+
+--------------------------------------------------
+
+Child:
+
+Valid values:
+1 to 3
+
+Not Allowed.
+
+--------------------------------------------------
+
+Rule 6: Postconditions
+
+Child classes may strengthen postconditions.
+
+Parent:
+
+brake()
+reduces speed
+
+Child:
+
+brake()
+reduces speed
+and charges battery
+
+Allowed.
+
+--------------------------------------------------
+
+14. Common LSP Violations
+
+1. Throwing UnsupportedOperationException
+
+Example:
+
+withdraw()
+{
+    throw new UnsupportedOperationException();
+}
+
+--------------------------------------------------
+
+2. Empty Method Implementations
+
+Example:
+
+deleteFile()
+{
+}
+
+The child cannot support behavior
+but still inherits it.
+
+--------------------------------------------------
+
+3. Using instanceof Frequently
+
+Example:
+
+if(account instanceof FixedDepositAccount)
+{
+}
+
+Frequent instanceof checks often indicate
+poor inheritance design.
+
+--------------------------------------------------
+
+4. Returning Constant Values
+
+Example:
+
+public int getFuel()
+{
+    return 0;
+}
+
+Regardless of state,
+the method always returns the same value.
+
+This often indicates LSP violation.
+
+--------------------------------------------------
+
+15. Real World Examples
+
+Banking System
+
+Account
+│
+├── SavingsAccount
+├── CurrentAccount
+└── FixedDepositAccount
+
+--------------------------------------------------
+
+Vehicle System
+
+Vehicle
+│
+├── Car
+├── Bike
+└── Truck
+
+Every child should behave like a Vehicle.
+
+--------------------------------------------------
+
+Payment System
+
+PaymentMethod
+│
+├── CreditCardPayment
+├── UPIPayment
+└── NetBankingPayment
+
+Every payment type should process payment correctly.
+
+--------------------------------------------------
+
+Notification System
+
+Notification
+│
+├── EmailNotification
+├── SMSNotification
+└── PushNotification
+
+Each notification type should support sending.
+
+--------------------------------------------------
+
+16. Advantages Of LSP
+
+1. Better Inheritance
+
+Inheritance becomes meaningful.
+
+--------------------------------------------------
+
+2. Better Maintainability
+
+Code becomes easier to maintain.
+
+--------------------------------------------------
+
+3. Better Reusability
+
+Parent references can work with child objects.
+
+--------------------------------------------------
+
+4. Better Extensibility
+
+New child classes can be added safely.
+
+--------------------------------------------------
+
+5. Reduced Runtime Errors
+
+Unexpected failures are minimized.
+
+--------------------------------------------------
+
+6. Better Code Quality
+
+Object hierarchies become cleaner.
+
+--------------------------------------------------
+
+17. Interview Questions
+
+Q1. What is Liskov Substitution Principle?
+
+Answer:
+
+Objects of a superclass should be replaceable
+with objects of its subclasses without affecting
+the correctness of the program.
+
+--------------------------------------------------
+
+Q2. Who introduced LSP?
+
+Answer:
+
+Barbara Liskov introduced LSP in 1987.
+
+--------------------------------------------------
+
+Q3. Why is LSP important?
+
+Answer:
+
+LSP ensures that inheritance hierarchies are
+correct and that child classes behave properly
+when substituted for parent classes.
+
+--------------------------------------------------
+
+Q4. Give an example of LSP violation.
+
+Answer:
+
+Bird -> fly()
+
+Penguin -> fly()
+
+Since Penguin cannot fly,
+the inheritance hierarchy is incorrect.
+
+--------------------------------------------------
+
+Q5. How is LSP related to OCP?
+
+Answer:
+
+OCP depends on LSP.
+
+For OCP to work properly,
+all subclasses must be substitutable
+for their parent classes.
+
+--------------------------------------------------
+
+18. Output
+
+Withdrawal Successful
+
+or
+
+Sparrow is flying
+Eagle is flying
+
+Depending on the implementation used.
+
+--------------------------------------------------
+
+19. Conclusion
+
+The Liskov Substitution Principle (LSP)
+states that child classes should be able
+to replace parent classes without affecting
+the correctness of the application.
+
+A subclass should never break the behavior
+promised by its parent class.
+
+By following LSP:
+
+• Inheritance becomes meaningful
+• OCP works correctly
+• Code becomes maintainable
+• Runtime errors decrease
+• Software becomes more reliable
+
+Therefore, LSP is one of the most important
+principles for designing robust and scalable
+object-oriented applications.
+*/

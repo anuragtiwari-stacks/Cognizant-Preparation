@@ -1,0 +1,493 @@
+/*
+===============================================================================
+                         TEST DRIVEN DEVELOPMENT (TDD)
+===============================================================================
+
+WHAT IS TDD?
+------------
+Test Driven Development (TDD) is a software development methodology in which
+developers write test cases before writing the actual application code.
+
+Instead of writing the implementation first, TDD follows a simple cycle:
+
+Write Test
+     ↓
+Run Test (Fail)
+     ↓
+Write Code
+     ↓
+Run Test (Pass)
+     ↓
+Improve Code
+     ↓
+Repeat
+
+TDD helps developers build reliable, maintainable, and bug-free software.
+
+===============================================================================
+INTERVIEW DEFINITION
+===============================================================================
+
+Test Driven Development (TDD) is a software development approach in which
+tests are written before the implementation code, following the
+Red-Green-Refactor cycle.
+
+===============================================================================
+WHY USE TDD?
+===============================================================================
+
+1. Improves code quality.
+
+2. Detects bugs early.
+
+3. Encourages writing clean and modular code.
+
+4. Prevents unnecessary code.
+
+5. Supports continuous testing.
+
+6. Makes refactoring safe.
+
+7. Improves software reliability.
+
+8. Reduces debugging time.
+
+9. Provides better documentation through tests.
+
+10. Increases developer confidence.
+
+===============================================================================
+TDD CYCLE
+===============================================================================
+
+             RED
+              ↓
+      Write Failing Test
+              ↓
+             GREEN
+              ↓
+     Write Minimum Code
+        To Pass Test
+              ↓
+          REFACTOR
+              ↓
+     Improve Code Quality
+              ↓
+          Repeat Cycle
+
+===============================================================================
+STEP 1 : RED PHASE
+===============================================================================
+
+Write a test before writing the actual implementation.
+
+Since the feature does not exist yet,
+the test must FAIL.
+
+Purpose:
+--------
+• Define expected behavior.
+• Verify the test is capable of detecting failure.
+• Prevent writing unnecessary code.
+
+Example
+
+Test:
+
+Expected:
+5 + 5 = 10
+
+Current Code:
+No add() method exists.
+
+Result:
+FAIL
+
+Red = Test Failed
+
+===============================================================================
+WRITING FAILING TESTS
+===============================================================================
+
+A failing test means:
+
+• Method is not implemented.
+• Wrong output.
+• Compilation error.
+• Assertion failure.
+
+Purpose:
+--------
+Ensure the test is valid before writing the implementation.
+
+===============================================================================
+STEP 2 : GREEN PHASE
+===============================================================================
+
+Write only the minimum amount of code required to make the failing test pass.
+
+Do NOT optimize.
+
+Do NOT add extra features.
+
+Only satisfy the current test.
+
+Example
+
+Test:
+
+Expected:
+add(5,5) = 10
+
+Implementation:
+
+return a + b;
+
+Result:
+PASS
+
+Green = Test Passed
+
+===============================================================================
+WRITING MINIMAL CODE TO PASS TESTS
+===============================================================================
+
+Rules:
+
+• Write the simplest possible code.
+• Do not over-engineer.
+• Do not think about future features.
+• Only satisfy the current requirement.
+
+Wrong Approach
+
+Adding unnecessary validations,
+extra methods,
+future functionality.
+
+Correct Approach
+
+Write only enough code
+to make the current test pass.
+
+===============================================================================
+STEP 3 : REFACTOR PHASE
+===============================================================================
+
+After all tests pass,
+
+Improve the code without changing its behavior.
+
+The functionality must remain exactly the same.
+
+Refactoring may include:
+
+• Removing duplicate code.
+• Improving readability.
+• Better naming.
+• Breaking large methods.
+• Improving design.
+• Applying SOLID Principles.
+• Applying Design Patterns.
+
+After refactoring,
+
+Run all tests again.
+
+If all tests still pass,
+
+Refactoring is successful.
+
+===============================================================================
+REFACTORING CODE
+===============================================================================
+
+Purpose:
+
+• Cleaner code.
+• Better maintainability.
+• Better readability.
+• Reduced duplication.
+• Improved performance (if required).
+
+Examples
+
+Before Refactoring
+
+if(a>b)
+{
+    return a-b;
+}
+else
+{
+    return -(b-a);
+}
+
+After Refactoring
+
+return a-b;
+
+Both produce the same result,
+but the second version is simpler.
+
+===============================================================================
+RED → GREEN → REFACTOR
+===============================================================================
+
+Step 1
+
+Write Test
+
+↓
+
+Test Fails
+
+↓
+
+RED
+
+------------------------------------
+
+Step 2
+
+Write Minimal Code
+
+↓
+
+Test Passes
+
+↓
+
+GREEN
+
+------------------------------------
+
+Step 3
+
+Improve Code
+
+↓
+
+Run Tests Again
+
+↓
+
+Still Pass
+
+↓
+
+REFACTOR COMPLETE
+
+===============================================================================
+REAL-LIFE EXAMPLE
+===============================================================================
+
+Suppose you are developing a Calculator.
+
+Requirement:
+
+Calculator should add two numbers.
+
+Step 1
+
+Write Test
+
+Expected:
+
+5 + 5 = 10
+
+Current Result:
+
+Method not available.
+
+Status:
+
+RED
+
+------------------------------------
+
+Step 2
+
+Write Code
+
+public int add(int a, int b)
+{
+    return a + b;
+}
+
+Run Test
+
+Status:
+
+GREEN
+
+------------------------------------
+
+Step 3
+
+Improve Naming
+
+Add comments
+
+Improve formatting
+
+Run Test Again
+
+Still PASS
+
+Status:
+
+REFACTOR
+
+===============================================================================
+ADVANTAGES OF TDD
+===============================================================================
+
+• Better software quality.
+• Fewer bugs.
+• Faster debugging.
+• Better design.
+• Easier maintenance.
+• Safe refactoring.
+• High code coverage.
+• Improved confidence.
+• Cleaner architecture.
+• Excellent documentation.
+
+===============================================================================
+DISADVANTAGES OF TDD
+===============================================================================
+
+• Learning curve for beginners.
+• Initial development is slower.
+• Requires discipline.
+• Difficult for legacy code.
+• Poorly written tests reduce effectiveness.
+
+===============================================================================
+BEST PRACTICES
+===============================================================================
+
+• Write one test at a time.
+• Write only failing tests first.
+• Write minimum code.
+• Refactor only after all tests pass.
+• Keep tests independent.
+• Use meaningful test names.
+• Execute tests frequently.
+• Avoid duplicate test cases.
+
+===============================================================================
+COMMON MISTAKES
+===============================================================================
+
+❌ Writing implementation before tests.
+
+❌ Adding unnecessary features.
+
+❌ Refactoring before tests pass.
+
+❌ Ignoring failing tests.
+
+❌ Writing large test cases.
+
+===============================================================================
+INTERVIEW QUESTIONS
+===============================================================================
+
+Q1. What is TDD?
+
+Ans:
+TDD is a software development methodology where tests are written before
+implementation following the Red-Green-Refactor cycle.
+
+--------------------------------------------------
+
+Q2. What are the three phases of TDD?
+
+Ans:
+
+1. Red
+2. Green
+3. Refactor
+
+--------------------------------------------------
+
+Q3. What happens in the Red phase?
+
+Ans:
+
+Write a test.
+
+Run it.
+
+The test must fail.
+
+--------------------------------------------------
+
+Q4. What happens in the Green phase?
+
+Ans:
+
+Write the minimum code required to pass the test.
+
+--------------------------------------------------
+
+Q5. What happens during Refactoring?
+
+Ans:
+
+Improve the internal structure of the code without changing its behavior.
+
+--------------------------------------------------
+
+Q6. Why is Refactoring important?
+
+Ans:
+
+• Cleaner code.
+• Better readability.
+• Easier maintenance.
+• Reduced duplication.
+
+--------------------------------------------------
+
+Q7. What is meant by "Write Minimum Code"?
+
+Ans:
+
+Only write enough implementation to make the current failing test pass.
+
+--------------------------------------------------
+
+Q8. Why should tests be written first?
+
+Ans:
+
+To define requirements clearly and ensure every feature is verified before
+implementation.
+
+===============================================================================
+ONE-LINE REVISION
+===============================================================================
+
+TDD
+→ Test First, Code Later.
+
+Red
+→ Write a failing test.
+
+Green
+→ Write minimum code to pass.
+
+Refactor
+→ Improve code without changing behavior.
+
+Rule
+→ Red → Green → Refactor → Repeat.
+
+Goal
+→ High-quality, maintainable, bug-free software.
+
+===============================================================================
+*/

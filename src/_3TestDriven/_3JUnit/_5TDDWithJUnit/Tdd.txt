@@ -1,0 +1,112 @@
+/*
+===============================================================================
+                     TEST DRIVEN DEVELOPMENT (TDD)
+===============================================================================
+
+WHAT IS TDD?
+===============================================================================
+
+TDD stands for Test Driven Development.
+
+It is a software development methodology in which
+tests are written BEFORE writing the actual code.
+
+Instead of writing code first,
+developers write a failing test,
+then write the minimum code to pass the test,
+and finally improve the code.
+
+===============================================================================
+TDD CYCLE
+===============================================================================
+
+RED
+
+↓
+
+GREEN
+
+↓
+
+REFACTOR
+
+Repeat
+
+===============================================================================
+RED PHASE
+===============================================================================
+
+Write a Test.
+
+There is no implementation.
+
+Result
+
+FAILED
+
+===============================================================================
+GREEN PHASE
+===============================================================================
+
+Write minimum code.
+
+Result
+
+PASSED
+
+===============================================================================
+REFACTOR PHASE
+===============================================================================
+
+Improve the code.
+
+Do not change functionality.
+
+Result
+
+PASSED
+
+===============================================================================
+ADVANTAGES
+===============================================================================
+
+• Better Code Quality
+
+• Fewer Bugs
+
+• High Test Coverage
+
+• Easier Refactoring
+
+• Cleaner Design
+
+• Faster Debugging
+
+===============================================================================
+INTERVIEW QUESTIONS
+===============================================================================
+
+Q. What is TDD?
+
+Ans:
+
+Test Driven Development is a software
+development approach where tests are
+written before writing the actual code.
+
+===============================================================================
+ONE-LINE REVISION
+===============================================================================
+
+RED
+
+↓
+
+GREEN
+
+↓
+
+REFACTOR
+
+===============================================================================
+*/

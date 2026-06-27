@@ -1,0 +1,419 @@
+/*
+===============================================================================
+                        PARAMETERIZED TESTS IN JUNIT
+===============================================================================
+
+WHAT IS A PARAMETERIZED TEST?
+===============================================================================
+
+A Parameterized Test is a JUnit feature that allows a single test method
+to execute multiple times using different input values.
+
+Instead of writing multiple test methods with different inputs,
+JUnit automatically runs the same test method for each input.
+
+Interview Definition
+
+A Parameterized Test is a JUnit test that executes the same test method
+multiple times with different sets of input data.
+
+===============================================================================
+WHY DO WE NEED PARAMETERIZED TESTS?
+===============================================================================
+
+Suppose we want to check whether different numbers are positive.
+
+Without Parameterized Tests
+
+@Test
+public void testPositive1()
+{
+    assertTrue(10 > 0);
+}
+
+@Test
+public void testPositive2()
+{
+    assertTrue(20 > 0);
+}
+
+@Test
+public void testPositive3()
+{
+    assertTrue(30 > 0);
+}
+
+Notice that only the input changes.
+
+This creates duplicate code.
+
+Instead of writing multiple test methods,
+JUnit provides Parameterized Tests.
+
+===============================================================================
+SOLUTION
+===============================================================================
+
+@ParameterizedTest
+@ValueSource(ints = {10,20,30})
+
+public void testPositiveNumbers(int number)
+{
+    assertTrue(number > 0);
+}
+
+JUnit automatically executes
+
+10
+
+↓
+
+20
+
+↓
+
+30
+
+using the same test method.
+
+===============================================================================
+HOW PARAMETERIZED TESTS WORK
+===============================================================================
+
+JUnit reads the input values.
+
+↓
+
+Passes the first value to the test method.
+
+↓
+
+Executes the test.
+
+↓
+
+Passes the second value.
+
+↓
+
+Executes the test again.
+
+↓
+
+Continues until all values are tested.
+
+===============================================================================
+EXECUTION FLOW
+===============================================================================
+
+@ParameterizedTest
+
+↓
+
+Input = 10
+
+↓
+
+Execute Test
+
+↓
+
+PASS
+
+----------------------------------------
+
+Input = 20
+
+↓
+
+Execute Test
+
+↓
+
+PASS
+
+----------------------------------------
+
+Input = 30
+
+↓
+
+Execute Test
+
+↓
+
+PASS
+
+===============================================================================
+TYPES OF PARAMETERIZED TESTS
+===============================================================================
+
+JUnit provides multiple parameter sources.
+
+1.
+
+@ValueSource
+
+Passes primitive values like
+
+• int
+
+• long
+
+• double
+
+• boolean
+
+• char
+
+• String
+
+----------------------------------------
+
+2.
+
+@NullSource
+
+Passes a single null value.
+
+----------------------------------------
+
+3.
+
+@EmptySource
+
+Passes an empty value.
+
+Examples
+
+Empty String
+
+Empty Collection
+
+Empty Array
+
+----------------------------------------
+
+4.
+
+@NullAndEmptySource
+
+Passes both
+
+null
+
+and
+
+empty values.
+
+----------------------------------------
+
+5.
+
+@CsvSource
+
+Passes multiple values
+in comma-separated format.
+
+Example
+
+10,20,30
+
+5,5,10
+
+----------------------------------------
+
+6.
+
+@MethodSource
+
+Reads test data from another Java method.
+
+Useful for complex test data.
+
+===============================================================================
+ADVANTAGES
+===============================================================================
+
+• Removes Duplicate Code
+
+• Improves Readability
+
+• Easy Maintenance
+
+• Less Boilerplate Code
+
+• Supports Multiple Input Values
+
+• Industry Standard Practice
+
+• Easy to Extend
+
+===============================================================================
+REAL-LIFE EXAMPLE
+===============================================================================
+
+Suppose a teacher wants to verify whether
+multiple students have passed.
+
+Without Parameterized Test
+
+Check Student 1
+
+Check Student 2
+
+Check Student 3
+
+Check Student 4
+
+With Parameterized Test
+
+One test method
+
+↓
+
+Student 1
+
+↓
+
+Student 2
+
+↓
+
+Student 3
+
+↓
+
+Student 4
+
+Automatically.
+
+===============================================================================
+WHEN SHOULD WE USE PARAMETERIZED TESTS?
+===============================================================================
+
+Use Parameterized Tests when
+
+• Only the input values change.
+
+• The testing logic remains the same.
+
+• Multiple test cases follow the same pattern.
+
+Examples
+
+• Positive Numbers
+
+• Prime Numbers
+
+• Even Numbers
+
+• Login Credentials
+
+• Discount Calculations
+
+• Tax Calculations
+
+===============================================================================
+COMMON MISTAKES
+===============================================================================
+
+❌ Writing multiple identical test methods.
+
+❌ Using @Test instead of @ParameterizedTest.
+
+❌ Forgetting to add a parameter source
+such as @ValueSource or @CsvSource.
+
+❌ Passing incompatible data types.
+
+===============================================================================
+INTERVIEW QUESTIONS
+===============================================================================
+
+Q1. What is a Parameterized Test?
+
+Ans:
+
+A Parameterized Test is a JUnit feature that allows
+the same test method to run multiple times using
+different input values.
+
+--------------------------------------------------
+
+Q2. Why do we use Parameterized Tests?
+
+Ans:
+
+To avoid duplicate test methods and execute the
+same test logic with different inputs.
+
+--------------------------------------------------
+
+Q3. Which annotation is used for Parameterized Tests?
+
+Ans:
+
+@ParameterizedTest
+
+--------------------------------------------------
+
+Q4. Name different parameter sources.
+
+Ans:
+
+@ValueSource
+
+@NullSource
+
+@EmptySource
+
+@NullAndEmptySource
+
+@CsvSource
+
+@MethodSource
+
+--------------------------------------------------
+
+Q5. Which parameter source is used for multiple
+columns of data?
+
+Ans:
+
+@CsvSource
+
+--------------------------------------------------
+
+Q6. Which parameter source is used for
+complex objects?
+
+Ans:
+
+@MethodSource
+
+===============================================================================
+ONE-LINE REVISION
+===============================================================================
+
+Parameterized Test
+
+→ One Test Method
+
+↓
+
+Multiple Inputs
+
+↓
+
+Multiple Executions
+
+↓
+
+Less Code
+
+↓
+
+Better Testing
+
+===============================================================================

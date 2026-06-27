@@ -1,0 +1,52 @@
+/*
+========================================================
+TOPIC : PACKAGES IN PL/SQL
+========================================================
+
+WHAT IS A PACKAGE?
+
+A Package is a database object that groups
+related Procedures and Functions together.
+
+A Package has two parts:
+
+1. Package Specification
+   -> Declaration
+
+2. Package Body
+   -> Implementation
+
+========================================================
+WHY USE PACKAGES?
+========================================================
+
+1. Code Organization
+   Related Procedures And Functions
+   Are Stored Together.
+
+2. Reusability
+   Same Package Can Be Used
+   Multiple Times.
+
+3. Easy Maintenance
+   Changes Are Made At One Place.
+
+4. Better Performance
+   Oracle Loads Package Into Memory.
+
+5. Security
+   Internal Logic Can Be Hidden.
+
+========================================================
+PACKAGE STRUCTURE
+
+PACKAGE SPECIFICATION
+        ↓
+Declares What Exists
+
+PACKAGE BODY
+        ↓
+Defines How It Works
+
+========================================================
+*/

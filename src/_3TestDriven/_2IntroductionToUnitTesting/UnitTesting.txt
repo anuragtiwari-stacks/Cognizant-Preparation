@@ -1,0 +1,458 @@
+/*
+===============================================================================
+                            JUNIT FRAMEWORK
+===============================================================================
+
+WHAT IS JUNIT?
+---------------
+JUnit is the most popular open-source testing framework for Java used to
+write and execute automated Unit Tests.
+
+It helps developers verify that individual methods and classes work correctly.
+
+JUnit is widely used in Java applications, Spring Boot projects, Maven,
+Gradle, and CI/CD pipelines.
+
+===============================================================================
+INTERVIEW DEFINITION
+===============================================================================
+
+JUnit is a Java testing framework used to write, organize, and execute
+unit test cases automatically.
+
+===============================================================================
+WHY USE JUNIT?
+===============================================================================
+
+1. Automates Unit Testing
+   - No need to manually check output using if-else statements.
+
+2. Detects Bugs Early
+   - Finds problems during development.
+
+3. Improves Code Quality
+   - Encourages writing modular and maintainable code.
+
+4. Supports Test Driven Development (TDD)
+   - Tests are written before implementation.
+
+5. Prevents Regression Bugs
+   - Existing functionality is verified whenever code changes.
+
+6. Fast Execution
+   - Thousands of test cases can execute within seconds.
+
+7. Better Documentation
+   - Test cases describe expected behavior.
+
+8. Easy CI/CD Integration
+   - Works with Jenkins, GitHub Actions, GitLab CI, Azure DevOps, etc.
+
+===============================================================================
+FEATURES OF JUNIT
+===============================================================================
+
+• Simple and easy to use.
+• Supports automatic test execution.
+• Provides Assertions.
+• Supports Test Suites.
+• Supports Annotations.
+• Generates test reports.
+• Works with Maven and Gradle.
+• Supports parameterized testing.
+
+===============================================================================
+SETTING UP JUNIT
+===============================================================================
+
+STEP 1
+-------
+Create a Java Project.
+
+STEP 2
+-------
+Add JUnit Dependency.
+
+If using Maven:
+
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.x.x</version>
+    <scope>test</scope>
+</dependency>
+
+If using Gradle:
+
+testImplementation 'org.junit.jupiter:junit-jupiter:5.x.x'
+
+STEP 3
+-------
+Create a test class.
+
+Example:
+
+Calculator.java
+CalculatorTest.java
+
+STEP 4
+-------
+Import JUnit packages.
+
+Example:
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+STEP 5
+-------
+Run the test class.
+
+JUnit automatically executes every method marked with @Test.
+
+===============================================================================
+WRITING BASIC JUNIT TESTS
+===============================================================================
+
+A basic JUnit test consists of:
+
+1. Create object.
+2. Call method.
+3. Compare actual result with expected result.
+4. Assertion decides PASS or FAIL.
+
+Example Flow
+
+Calculator
+      ↓
+add(5,5)
+      ↓
+Returns 10
+      ↓
+assertEquals(10,10)
+      ↓
+Test Passed
+
+===============================================================================
+JUNIT ANNOTATIONS
+===============================================================================
+
+@Test
+------
+Marks a method as a test case.
+
+@BeforeEach
+------------
+Runs before every test method.
+
+@AfterEach
+-----------
+Runs after every test method.
+
+@BeforeAll
+-----------
+Runs once before all test cases.
+
+@AfterAll
+----------
+Runs once after all test cases.
+
+@Disabled
+----------
+Temporarily disables a test.
+
+@DisplayName
+-------------
+Provides a custom readable test name.
+
+===============================================================================
+ASSERTIONS IN JUNIT
+===============================================================================
+
+Assertions compare the expected result with the actual result.
+
+If both are equal,
+Test PASSES.
+
+Otherwise,
+Test FAILS.
+
+===============================================================================
+COMMON ASSERTIONS
+===============================================================================
+
+assertEquals(expected, actual)
+--------------------------------
+Checks whether two values are equal.
+
+Example:
+assertEquals(10, calculator.add(5,5));
+
+--------------------------------------------
+
+assertNotEquals(expected, actual)
+---------------------------------
+Checks values are not equal.
+
+Example:
+assertNotEquals(20, calculator.add(5,5));
+
+--------------------------------------------
+
+assertTrue(condition)
+---------------------
+Checks condition is true.
+
+Example:
+assertTrue(10 > 5);
+
+--------------------------------------------
+
+assertFalse(condition)
+----------------------
+Checks condition is false.
+
+Example:
+assertFalse(5 > 10);
+
+--------------------------------------------
+
+assertNull(object)
+------------------
+Checks object is null.
+
+Example:
+assertNull(employee);
+
+--------------------------------------------
+
+assertNotNull(object)
+---------------------
+Checks object is not null.
+
+Example:
+assertNotNull(calculator);
+
+--------------------------------------------
+
+assertSame(expected, actual)
+----------------------------
+Checks both references point to the same object.
+
+--------------------------------------------
+
+assertNotSame(expected, actual)
+-------------------------------
+Checks references are different.
+
+--------------------------------------------
+
+assertArrayEquals(expected, actual)
+-----------------------------------
+Checks two arrays are equal.
+
+--------------------------------------------
+
+assertThrows()
+--------------
+Checks whether an exception is thrown.
+
+Example:
+
+assertThrows(
+    ArithmeticException.class,
+    () -> calculator.divide(10,0)
+);
+
+--------------------------------------------
+
+assertDoesNotThrow()
+--------------------
+Checks code executes without exception.
+
+Example:
+
+assertDoesNotThrow(
+    () -> calculator.divide(10,2)
+);
+
+===============================================================================
+TEST RESULT
+===============================================================================
+
+Green Tick  ✓
+-------------
+Test Passed
+
+Red Cross ✗
+-----------
+Test Failed
+
+===============================================================================
+MANUAL TESTING VS JUNIT
+===============================================================================
+
+Manual Testing
+
+if(result == expected)
+{
+    System.out.println("Passed");
+}
+else
+{
+    System.out.println("Failed");
+}
+
+---------------------------------------
+
+JUnit Testing
+
+assertEquals(expected, actual);
+
+JUnit automatically reports PASS or FAIL.
+
+===============================================================================
+ADVANTAGES OF JUNIT
+===============================================================================
+
+• Easy to write tests.
+• Automatic execution.
+• Saves development time.
+• Improves software quality.
+• Supports TDD.
+• Supports CI/CD.
+• Easy debugging.
+• Prevents regression bugs.
+• Generates reports.
+• Industry standard framework.
+
+===============================================================================
+DISADVANTAGES OF JUNIT
+===============================================================================
+
+• Initial setup required.
+• Test cases require maintenance.
+• External dependencies require Mockito.
+• Cannot replace Integration Testing.
+
+===============================================================================
+REAL-LIFE EXAMPLE
+===============================================================================
+
+Suppose a Calculator has an add() method.
+
+Input:
+5 + 5
+
+Expected Output:
+10
+
+JUnit automatically checks:
+
+Expected = 10
+
+Actual = 10
+
+Result:
+PASS
+
+===============================================================================
+INTERVIEW QUESTIONS
+===============================================================================
+
+Q1. What is JUnit?
+
+Ans:
+JUnit is an open-source Java testing framework used for automated Unit
+Testing.
+
+--------------------------------------------------
+
+Q2. Why do we use JUnit?
+
+Ans:
+To automate unit testing, improve code quality, support TDD, and detect
+bugs early.
+
+--------------------------------------------------
+
+Q3. Which annotation marks a test method?
+
+Ans:
+@Test
+
+--------------------------------------------------
+
+Q4. Which assertion checks equality?
+
+Ans:
+assertEquals()
+
+--------------------------------------------------
+
+Q5. Which assertion checks exceptions?
+
+Ans:
+assertThrows()
+
+--------------------------------------------------
+
+Q6. Difference between assertEquals() and assertSame()?
+
+assertEquals()
+---------------
+Compares values.
+
+assertSame()
+-------------
+Compares object references.
+
+--------------------------------------------------
+
+Q7. Which annotation executes before every test?
+
+Ans:
+@BeforeEach
+
+--------------------------------------------------
+
+Q8. Which annotation executes only once before all tests?
+
+Ans:
+@BeforeAll
+
+===============================================================================
+ONE-LINE REVISION
+===============================================================================
+
+JUnit
+→ Java Unit Testing Framework.
+
+@Test
+→ Marks a test method.
+
+Assertions
+→ Verify expected vs actual results.
+
+@BeforeEach
+→ Runs before every test.
+
+@AfterEach
+→ Runs after every test.
+
+@BeforeAll
+→ Runs once before all tests.
+
+@AfterAll
+→ Runs once after all tests.
+
+assertEquals()
+→ Checks equality.
+
+assertThrows()
+→ Checks exceptions.
+
+JUnit
+→ Industry-standard framework for Java Unit Testing.
+
+===============================================================================
