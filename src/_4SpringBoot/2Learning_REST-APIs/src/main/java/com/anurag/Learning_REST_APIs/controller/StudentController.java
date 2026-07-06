@@ -211,3 +211,230 @@ DELETE /students/5
 @PathVariable Long id
 =========================================================
 */
+
+/*
+====================================================================
+                    STUDENT CRUD REST APIs
+====================================================================
+
+Base URL:
+http://localhost:9091/students
+
+====================================================================
+1. CREATE STUDENT
+====================================================================
+
+Method:
+POST
+
+URL:
+http://localhost:9091/students
+
+Request Body:
+
+{
+    "name":"Anurag",
+    "email":"anurag@gmail.com",
+    "age":22,
+    "course":"Java"
+}
+
+Controller:
+
+@PostMapping
+public Student saveStudent(@RequestBody Student student)
+
+Purpose:
+Creates a new student in the database.
+
+Repository Method Used:
+save()
+
+====================================================================
+2. GET ALL STUDENTS
+====================================================================
+
+Method:
+GET
+
+URL:
+http://localhost:9091/students
+
+Request Body:
+Not Required
+
+Controller:
+
+@GetMapping
+public List<Student> getAllStudents()
+
+Purpose:
+Returns all students from the database.
+
+Repository Method Used:
+findAll()
+
+====================================================================
+3. GET STUDENT BY ID
+====================================================================
+
+Method:
+GET
+
+URL:
+http://localhost:9091/students/{id}
+
+Example:
+http://localhost:9091/students/1
+
+Request Body:
+Not Required
+
+Controller:
+
+@GetMapping("/{id}")
+public Student getStudentById(@PathVariable Long id)
+
+Purpose:
+Returns a single student using the given ID.
+
+Repository Method Used:
+findById()
+
+====================================================================
+4. UPDATE STUDENT
+====================================================================
+
+Method:
+PUT
+
+URL:
+http://localhost:9091/students/{id}
+
+Example:
+http://localhost:9091/students/1
+
+Request Body:
+
+{
+    "name":"Anurag Tiwari",
+    "email":"anurag@gmail.com",
+    "age":23,
+    "course":"Spring Boot"
+}
+
+Controller:
+
+@PutMapping("/{id}")
+public Student updateStudent(@PathVariable Long id,
+                             @RequestBody Student student)
+
+Purpose:
+Updates an existing student's information.
+
+Repository Method Used:
+save()
+
+====================================================================
+5. DELETE STUDENT
+====================================================================
+
+Method:
+DELETE
+
+URL:
+http://localhost:9091/students/{id}
+
+Example:
+http://localhost:9091/students/1
+
+Request Body:
+Not Required
+
+Controller:
+
+@DeleteMapping("/{id}")
+public String deleteStudent(@PathVariable Long id)
+
+Purpose:
+Deletes a student using the given ID.
+
+Repository Method Used:
+deleteById()
+
+====================================================================
+Repository Methods Used in CRUD
+====================================================================
+
+POST      -> save()
+
+GET ALL   -> findAll()
+
+GET BY ID -> findById()
+
+PUT       -> save()
+
+DELETE    -> deleteById()
+
+====================================================================
+HTTP Methods
+====================================================================
+
+POST    -> Create Data
+
+GET     -> Read Data
+
+PUT     -> Update Data
+
+DELETE  -> Delete Data
+
+====================================================================
+REST API FLOW
+====================================================================
+
+Postman
+    │
+    ▼
+StudentController
+    │
+    ▼
+StudentService
+    │
+    ▼
+StudentRepository
+    │
+    ▼
+Spring Data JPA
+    │
+    ▼
+Hibernate
+    │
+    ▼
+PostgreSQL
+
+====================================================================
+Interview Questions
+====================================================================
+
+Q1. Which annotation reads JSON data?
+Ans:
+@RequestBody
+
+Q2. Which annotation reads value from URL?
+Ans:
+@PathVariable
+
+Q3. Which repository methods are used?
+
+save()
+findAll()
+findById()
+deleteById()
+
+Q4. Which HTTP methods are used?
+
+POST
+GET
+PUT
+DELETE
+*/
